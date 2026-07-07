@@ -1,466 +1,485 @@
-<!DOCTYPE HTML>
-<!--
-	Hekemo Tmi	
--->
-<html>
-	<head>
-		<title>Hekemo TMI/Jaime Rautavirta</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaime Rautavirta — IT & Asiakasratkaisut</title>
+<meta name="description" content="Jaime Rautavirta — IT-tekniikka, laadunvalvonta ja asiakaskoordinointi. Vantaa/Tuusula.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F6F8;
+    --surface:#FFFFFF;
+    --ink:#131A26;
+    --ink-muted:#55606E;
+    --accent:#2456DB;
+    --accent-soft:#E7EDFB;
+    --line:#DFE3E9;
+    --radius:10px;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk',sans-serif;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+  /* background grid texture */
+  .grid-bg{
+    position:fixed;inset:0;z-index:-1;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.35;
+    mask-image:linear-gradient(to bottom, black, transparent 85%);
+  }
 
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-gem"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>Jaime Rautavirta</h1>
-								<p>Tämä on lyhyt esittely itsestäni, kokemuksestani sekä taidoistani.<a href="https://html5up.net/license"></a></p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">Intro</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+  /* NAV */
+  header.nav{
+    position:sticky;top:0;z-index:20;
+    background:rgba(245,246,248,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  header.nav .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;font-size:17px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .brand .dot{width:8px;height:8px;background:var(--accent);border-radius:2px;display:inline-block;}
+  nav.links{display:flex;gap:28px;font-size:14px;font-weight:500;}
+  nav.links a{text-decoration:none;color:var(--ink-muted);transition:color .15s;}
+  nav.links a:hover{color:var(--accent);}
 
-				<!-- Main -->
-					<div id="main">
+  /* HERO */
+  .hero{padding:96px 0 72px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);
+    padding:6px 12px;border-radius:100px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);}
+  .hero h1{font-size:clamp(38px,6vw,58px);line-height:1.05;font-weight:700;max-width:760px;}
+  .hero .role{color:var(--accent);}
+  .hero p.lede{
+    margin-top:22px;font-size:18px;color:var(--ink-muted);max-width:560px;
+  }
+  .hero .actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:14.5px;
+    padding:13px 22px;border-radius:8px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--ink);color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(19,26,38,.18);}
+  .btn-ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line);}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:var(--accent);}
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Intro</h2>
-								<span class="image main"><img src="images/koirat.jpg" alt="" /></span>
-								<p>Hei, Tämä on minun henkilökohtainen ansioluettelo. Lisäilen tänne ajan mittaa omia mielenkiintoisia projekteja ja saavutuksiani.   <a href="#work">Työni</a>.</p>
-								<p>Ota yhteyttä jos kiinnostuit jostain tietystä projektista.</p>
-							</article>
+  .hero-meta{
+    margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);padding-top:24px;gap:20px;
+  }
+  .hero-meta div .k{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;}
+  .hero-meta div .v{margin-top:4px;font-weight:600;font-size:15px;}
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/data.jpg" alt="" /></span>
-															<section id="work">
-    <h2>Ansioluettelo</h2>
-    <div style="max-width: 800px; margin: 20px auto; padding: 20px;">
-        <div style="margin-bottom: 20px;">
-            <h3>Kokemus</h3>
-            <ul style="list-style-type: none; padding: 0;">
-                <li style="margin-bottom: 15px;">
-                    <h4>Inrego Oy</h4>
-                    <p><strong>Aika:</strong> Elokuu 2022 - Nykypäivä</p>
-                    <p>Titteli: IT-Teknikko/ Tietoturva-asiantuntija</p>
-                    <p>Monipuoliset datan analysointiin sekä tietoturvaan liittyvät tehtävät sekä AI-teknologioiden integrointi ja automaatio.</p>
-                </li>
-                <li style="margin-bottom: 15px;">
-                    <h4>Grano Oy</h4>
-                    <p><strong>Aika:</strong> Kesäkuu 2017 - Kesäkuu 2022</p>
-                    <p>Titteli: Asiakaskoordinaattori/ Tekninen projektiasiantuntija </p>
-                    <p> <ul>
-    <li>
-        Asiakastapaamiset asiakkaiden tiloissa kartoittaen heidän tarpeensa Granon palveluista, kuten ikkunoiden kalvotukset, kyltit ja mainosteippaukset.
-    </li>
-    <li>
-        Ratkaisujen suunnittelu ja asennus asiakkaan toiveiden pohjalta varmistaen projektien toteutuksen sujuvuuden.
-    </li>
-    <li>
-        Yhteistyö teknisten tiimien kanssa, mukaan lukien asennustiimin mobiilisovelluksen kehitystyö, joka mahdollisti tiimin aikataulutettujen työtehtävien ja projektitietojen reaaliaikaisen seurannan.
-    </li>
-</ul>
+  /* SECTIONS */
+  section{padding:64px 0;}
+  .section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:36px;}
+  .section-head .num{font-family:'IBM Plex Mono',monospace;color:var(--accent);font-size:14px;}
+  .section-head h2{font-size:26px;}
+  .section-sub{color:var(--ink-muted);font-size:14.5px;margin-top:6px;}
 
-                </li>
-                <!-- Lisää muita kokemuksia tarvittaessa -->
-            </ul>
-        </div>
+  /* TIMELINE */
+  .timeline{position:relative;padding-left:28px;border-left:2px solid var(--line);}
+  .tl-item{position:relative;padding-bottom:44px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-badge{
+    position:absolute;left:-38px;top:2px;
+    width:20px;height:20px;border-radius:5px;
+    background:var(--surface);border:2px solid var(--accent);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .tl-badge.current{background:var(--accent);}
+  .tl-badge::after{content:'';width:6px;height:6px;background:var(--accent);border-radius:1px;}
+  .tl-badge.current::after{background:#fff;}
+  .tl-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 26px;
+  }
+  .tl-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:4px;}
+  .tl-role{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;}
+  .tl-org{color:var(--ink-muted);font-size:14px;margin-top:2px;}
+  .tl-date{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-muted);white-space:nowrap;padding-top:4px;}
+  .tl-tag{
+    display:inline-block;margin-top:10px;margin-right:6px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    background:var(--accent-soft);color:var(--accent);
+    padding:3px 9px;border-radius:100px;
+  }
+  .tl-list{margin:14px 0 0;padding-left:18px;color:var(--ink);font-size:14.5px;}
+  .tl-list li{margin-bottom:7px;}
+  .tl-list li::marker{color:var(--accent);}
 
-        <div style="margin-bottom: 20px;">
-            <h3>Koulutus</h3>
-            <ul style="list-style-type: none; padding: 0;">
-                <li style="margin-bottom: 15px;">
-                    <h4>Insinööri (AMK), Tieto- ja viestintätekniikka</h4>
-                    <p><strong>Aika:</strong> Helmikuu 2021 - Nykypäivä</p>
-                    <p>Oppilaitos: Metropolia</p>
-                    <p><ul>
-    <li>
-        Syvällinen koulutus tieto- ja viestintätekniikan alueella, mukaan lukien ohjelmistokehitys, tietokannat, verkkoarkkitehtuurit ja tietoturvakäytännöt.
-    </li>
-    <li>
-        Koulutus data-analyysistä ja -visualisoinnista, mukaan lukien tilastolliset menetelmät, datan keruu, puhdistus ja analysointi.
-    </li>
-    <li>
-        Opiskelu tietoturvan perusteista, kuten riskienhallinta, tietosuojakäytännöt ja turvallisuusprotokollat.
-    </li>
-    <li>
-        Käytännön projekteissa saatu kokemus tietojärjestelmien suunnittelusta, toteutuksesta, ongelmanratkaisusta ja tiimityöskentelystä.
-    </li>
-</ul></p>
-                </li>
-                <li style="margin-bottom: 15px;">
-                    <h4>Tieto- ja viestintätekniikan perustutkinto</h4>
-                    <p><strong>Aika:</strong> Helmikuu 2020 - Huhtikuu 2021</p>
-                    <p>Oppilaitos: Careeria</p>
-                    <p><ul>
-    <li>Tieto- ja viestintätekniikan perustehtävät</li>
-    <li>Tekninen tuki</li>
-    <li>Järjestelmätuki</li>
-    <li>Verkkopalvelun tekninen toteuttaminen</li>
-    <li>Yritystoiminnan suunnittelu</li>
-</ul>
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
+  .skill-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;
+  }
+  .skill-card h3{font-size:14px;font-family:'IBM Plex Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    font-size:13.5px;padding:6px 12px;border-radius:7px;
+    background:var(--bg);border:1px solid var(--line);
+  }
 
-</p>
-                </li>
-                <!-- Lisää muita koulutuksia tarvittaessa -->
-            </ul>
-        </div>
+  /* PROJECTS */
+  .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .project-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 26px;
+  }
+  .project-card .tag{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
+    text-transform:uppercase;letter-spacing:.05em;
+  }
+  .project-card h3{margin-top:10px;font-size:18px;}
+  .project-card p{color:var(--ink-muted);font-size:14.5px;margin-top:10px;}
 
-        <div style="margin-bottom: 20px;">
-            <h3>Taidot</h3>
-            <ul style="list-style-type: none; padding: 0;">
-                <li>SQL</li>
-                <li>Python</li>
-                <li>Javascript</li>
-		<li>C#</li>
-		<li>Kyberturvallisuus</li>
-		<li>Data analytiikka/ Datan visualisointi</li>
-		<li>AI-teknologioiden integrointi</li>
-                <!-- Lisää muita taitoja tarvittaessa -->
-            </ul>
-        </div>    
+  /* EDUCATION */
+  .edu-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap;gap:6px;
+  }
+  .edu-row:last-child{border-bottom:none;}
+  .edu-school{font-weight:600;font-family:'Space Grotesk',sans-serif;font-size:16px;}
+  .edu-degree{color:var(--ink-muted);font-size:14px;margin-top:2px;}
+  .edu-date{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-muted);}
+
+  /* PERSONAL STRIP */
+  .personal{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:8px;overflow:hidden;
+  }
+  .personal img{
+    width:100%;height:260px;object-fit:cover;border-radius:calc(var(--radius) - 4px);display:block;
+  }
+  .personal .personal-copy{padding:20px 26px 20px 4px;}
+  .personal .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;}
+  .personal h3{font-size:19px;margin-top:10px;}
+  .personal p{color:var(--ink-muted);font-size:14.5px;margin-top:10px;}
+  @media (max-width:760px){
+    .personal{grid-template-columns:1fr;}
+    .personal .personal-copy{padding:4px 20px 20px;}
+  }
+
+  /* CONTACT / FOOTER */
+  footer{
+    background:var(--ink);color:#fff;padding:64px 0 40px;margin-top:40px;
+  }
+  footer h2{color:#fff;font-size:28px;max-width:480px;}
+  footer p{color:#AEB6C4;margin-top:14px;max-width:440px;}
+  .contact-grid{display:flex;gap:40px;margin-top:40px;flex-wrap:wrap;}
+  .contact-item .k{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8AA3;text-transform:uppercase;letter-spacing:.06em;}
+  .contact-item a, .contact-item span{display:block;margin-top:6px;font-weight:600;text-decoration:none;color:#fff;font-size:15px;}
+  .contact-item a:hover{color:var(--accent-soft);}
+  .foot-bottom{
+    margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.12);
+    display:flex;justify-content:space-between;color:#7C8AA3;font-size:12.5px;flex-wrap:wrap;gap:10px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  /* avatar */
+  .avatar-slot{
+    width:112px;height:112px;border-radius:14px;
+    overflow:hidden;margin-bottom:28px;
+    border:1px solid var(--line);
+    box-shadow:0 6px 18px rgba(19,26,38,0.10);
+  }
+  .avatar-slot img{
+    width:100%;height:100%;object-fit:cover;object-position:50% 18%;
+    display:block;
+  }
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  @media (max-width:760px){
+    nav.links{display:none;}
+    .hero{padding:64px 0 48px;}
+    .hero-meta{grid-template-columns:1fr;gap:16px;}
+    .projects-grid{grid-template-columns:1fr;}
+    .contact-grid{gap:28px;}
+  }
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>Jaime Rautavirta</div>
+    <nav class="links">
+      <a href="#kokemus">Kokemus</a>
+      <a href="#osaaminen">Osaaminen</a>
+      <a href="#projektit">Projektit</a>
+      <a href="#koulutus">Koulutus</a>
+      <a href="#yhteystiedot">Yhteystiedot</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="avatar-slot"><img src="images/jaime.jpg" alt="Jaime Rautavirta"></div>
+    <span class="eyebrow">Saatavilla uusiin mahdollisuuksiin</span>
+    <h1>IT-tausta, tarkka silmä laadulle,<br> ja taito rakentaa <span class="role">asiakassuhteita</span>.</h1>
+    <p class="lede">Neljän vuoden kokemus laitteiden testauksesta, tietoturvasta ja asiakaskoordinoinnista — nyt suuntana teknologian ja myynnin risteyskohta.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="mailto:rautavirtajaime@gmail.com">Ota yhteyttä ↗</a>
+      <a class="btn btn-ghost" href="#kokemus">Katso kokemukset</a>
+    </div>
+
+    <div class="hero-meta">
+      <div><div class="k">Sijainti</div><div class="v">Tuusula, Suomi</div></div>
+      <div><div class="k">Nykyinen rooli</div><div class="v">IT Technician @ Inrego</div></div>
+      <div><div class="k">Kielet</div><div class="v">FI · EN · SV</div></div>
+    </div>
+  </div>
 </section>
 
-							</article>
+<section id="kokemus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">01</span>
+      <div><h2>Kokemus</h2><div class="section-sub">Kronologinen aikajana, uusimmasta vanhimpaan</div></div>
+    </div>
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="images/mina.jpg" alt="" /></span>
-								<p>Nimeni on Jaime Rautavirta, Olen 28 vuotias, kolmannen vuoden tietojärjestelmätieteen opiskelija, olen kiinnostunut erilaisista teknologioista ja niiden toteuttamisesta käytännössä.</p>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-badge current"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div><div class="tl-role">IT Technician</div><div class="tl-org">Inrego Oy — Vantaa</div></div>
+            <div class="tl-date">2022 — nyt</div>
+          </div>
+          <span class="tl-tag">Blancco</span><span class="tl-tag">Laadunvalvonta</span><span class="tl-tag">Prosessikehitys</span>
+          <ul class="tl-list">
+            <li>Useita rooleja laitteiden käsittelyprosessissa: mobiili- ja IT-laitteiden toiminnallinen testaus.</li>
+            <li>Tietojen turvallinen ylikirjoitus Blancco-ohjelmistolla, varmistaen laitteiden vaatimustenmukaisuuden.</li>
+            <li>Lukittujen ja estettyjen laitteiden käsittely ja palautus normaaliin prosessiin.</li>
+            <li>Laitteiden laatuluokittelu sekä monimutkaisempien "slow lane" -tapausten käsittely.</li>
+            <li>Tuotantolinjan inventaarion ylläpito ja tarkka kirjanpito laitevirrasta.</li>
+          </ul>
+        </div>
+      </div>
 
-								<p>
-    Olen hypännyt jo 16-vuotiaana työelämään. Oppisopimuskoulutuksen kautta suoritin rakennusalan perustutkinnon. Tämän jälkeen suuntasin hieman graafisemmalle alalle ja aloitin urani digin ja printin parissa. Tein graafista suunnittelua, myyntiä sekä asennusta monipuolisesti.
-</p>
+      <div class="tl-item reveal">
+        <div class="tl-badge"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div><div class="tl-role">Founder</div><div class="tl-org">Rautavirta Tmi — Vantaa</div></div>
+            <div class="tl-date">2022 — 2024</div>
+          </div>
+          <span class="tl-tag">Web</span><span class="tl-tag">SEO</span><span class="tl-tag">Asennus</span>
+          <ul class="tl-list">
+            <li>Suunnitteli ja toteutti mainoksia ja verkkosivuja asiakkaiden tarpeisiin.</li>
+            <li>Vastasi hakukoneoptimoinnista (SEO) sekä asiakasprojektien asennustöistä.</li>
+          </ul>
+        </div>
+      </div>
 
-<p>
-    Innostuttuani tästä alasta, perustin oman toiminimen ja jatkoin graafisen suunnittelun parissa. Tein myös tilauksesta verkkosivuja asiakkaille. Suuri mielenkiintoni on aina ollut IT-puolella ja käytännön toteutuksessa tietotekniikassa.
-</p>
+      <div class="tl-item reveal">
+        <div class="tl-badge"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div><div class="tl-role">Customer Coordinator</div><div class="tl-org">Grano Oy — Jyväskylä / Helsinki</div></div>
+            <div class="tl-date">2016 — 2022</div>
+          </div>
+          <span class="tl-tag">Asiakastyö</span><span class="tl-tag">Koordinointi</span>
+          <ul class="tl-list">
+            <li>Asiakastapaamiset paikan päällä tarpeiden kartoittamiseksi ja oikean ratkaisun suosittelemiseksi.</li>
+            <li>Ratkaisujen suunnittelu ja asennus asiakaskohtaisesti, aina ensikontaktista valmiiseen lopputulokseen.</li>
+            <li>Tiivis yhteistyö tekniikan kanssa, mukaan lukien asennustiimin reaaliaikaisen seurantasovelluksen kehitys.</li>
+          </ul>
+        </div>
+      </div>
 
-<p>
-    Hain sitten töiden ohessa opiskelemaan tieto- ja viestintätekniikkaa. Suoritin ensin perustutkinnon ja sen jälkeen hain Tieto- ja viestintätekniikan insinöörikoulutukseen. Vaihdoin myös kokoaikaiseen IT-alan työpaikkaan nimikkeellä IT-Teknikko / Tietoturva-asiantuntija. Tehtäviini kuuluu tietoturvan hallinta, tietoverkot, SQL- ja Python-pohjaisten tietokanta-analyysien toteuttaminen, vanhentuneiden IT-laitteiden tietoturvakäsittely Blancco-ohjelmistolla, sisältäen tietojen turvallisen ylikirjoittamisen sekä tietoturvavaatimusten mukaisen käsittelyn ja verifioinnin.
-</p>
+      <div class="tl-item reveal">
+        <div class="tl-badge"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div><div class="tl-role">Construction Worker</div><div class="tl-org">Staar — Jyväskylä</div></div>
+            <div class="tl-date">2012 — 2015</div>
+          </div>
+          <ul class="tl-list">
+            <li>Oppisopimus, keskittyen rakennusten peruskorjauksiin ja kylpyhuoneremontteihin.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="osaaminen">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">02</span>
+      <div><h2>Osaaminen</h2><div class="section-sub">Tekninen ja liiketoiminnallinen työkalupakki</div></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <h3>Ohjelmointi</h3>
+        <div class="chip-row">
+          <span class="chip">JavaScript</span><span class="chip">SQL</span><span class="chip">Python</span>
+          <span class="chip">HTML/CSS</span><span class="chip">C#</span><span class="chip">Node.js</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3>Data & työkalut</h3>
+        <div class="chip-row">
+          <span class="chip">Tietokannat</span><span class="chip">Excel</span><span class="chip">Power BI</span><span class="chip">Word</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3>Riski & tietoturva</h3>
+        <div class="chip-row">
+          <span class="chip">GDPR</span><span class="chip">Tietosuoja</span><span class="chip">ISO-sertifioinnit</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <h3>IT-tuki</h3>
+        <div class="chip-row">
+          <span class="chip">Verkkokonfiguraatiot</span><span class="chip">Järjestelmänvalvonta</span><span class="chip">Käyttäjätuki</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-								
-								<p>Tahdon jatkuvasti kehittää itseäni sekä osaamistani ja sen mukaa pysyä IT- alan jatkuvan kehityksen tahdissa.
-								Vapaa-ajalla tykkään pelata videopelejä ja harrastaa kaikenlaista urheilua monipuolisesti,
-								nautin erityisesti joukkuelajeista missä voin kehittyä tiimityöskentelyssä sekä pitää mielen virkeänä, nautin myös elokuvista ja hyvän ruoan kokkailusta.</p>
+<section id="projektit">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">03</span>
+      <div><h2>Projektit</h2><div class="section-sub">Poimintoja tekemisestä</div></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <span class="tag">Prosessikehitys · Inrego</span>
+        <h3>Laitteiden kunnostusprosessi</h3>
+        <p>Osa Inregon tuotantolinjaa, jossa yrityksiltä ostetut käytetyt laitteet käyvät läpi Blancco-ylikirjoituksen, toiminnallisen testauksen, laatuluokittelun ja monimutkaisemmille tapauksille oman slow lane -prosessin ennen jälleenmyyntiä. Mukana myös teollisen tason kehitystyössä, mm. mobiililaitteiden automatisoinnissa aktivoitumaan itsestään Blancco-ylikirjoituksen jälkeen — nopeuttaen laitteiden kulkua linjalla.</p>
+      </div>
+      <div class="project-card reveal">
+        <span class="tag">Sovelluskehitys · Grano</span>
+        <h3>Asennustiimin mobiilisovellus</h3>
+        <p>Työskenteli Granon teknisen tiimin kanssa mobiilisovelluksen parissa, joka antoi asennustiimille reaaliaikaisen näkymän aikataulutettuihin tehtäviin ja projektien tilaan.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-							
-							</article>
+<section id="koulutus">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">04</span>
+      <div><h2>Koulutus</h2><div class="section-sub">&nbsp;</div></div>
+    </div>
+    <div class="reveal">
+      <div class="edu-row">
+        <div><div class="edu-school">Metropolia Ammattikorkeakoulu</div><div class="edu-degree">Insinööri (AMK) — Tietotekniikka</div></div>
+        <div class="edu-date">2021 — 2025</div>
+      </div>
+      <div class="edu-row">
+        <div><div class="edu-school">Careeria</div><div class="edu-degree">Ammatillinen perustutkinto — Tieto- ja viestintätekniikka</div></div>
+        <div class="edu-date">2020 — 2021</div>
+      </div>
+      <div class="edu-row">
+        <div><div class="edu-school">Jyväskylän Ammattiopisto</div><div class="edu-degree">Ammatillinen perustutkinto — Rakennusala</div></div>
+        <div class="edu-date">2012 — 2015</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
+<section id="vapaa-aika">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="num">05</span>
+      <div><h2>Vapaa-ajalla</h2><div class="section-sub">&nbsp;</div></div>
+    </div>
+    <div class="personal reveal">
+      <img src="images/surf.jpg" alt="Surffikurssi Gold Coastilla, Australiassa">
+      <div class="personal-copy">
+        <span class="tag">Aktiivinen arki</span>
+        <h3>Jääkiekkoa, salia, tennistä — ja surffia aina kun tilaisuus antaa myöten</h3>
+        <p>Kuvassa surffikurssilta Gold Coastilta, Australiasta. Sama periksiantamattomuus kulkee mukana niin harrastuksissa kuin työssä.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
+<footer id="yhteystiedot">
+  <div class="wrap">
+    <h2>Jutellaanko?</h2>
+    <p>Avoinna uusille mahdollisuuksille teknologian, laadunvalvonnan ja asiakastyön risteyksessä.</p>
+    <div class="contact-grid">
+      <div class="contact-item"><div class="k">Sähköposti</div><a href="mailto:rautavirtajaime@gmail.com">rautavirtajaime@gmail.com</a></div>
+      <div class="contact-item"><div class="k">Puhelin</div><a href="tel:+358504386858">050 438 6858</a></div>
+      <div class="contact-item"><div class="k">Sijainti</div><span>Tuusula, Suomi</span></div>
+      <div class="contact-item"><div class="k">GitHub</div><a href="https://RautavirtaJaime.github.io" target="_blank" rel="noopener">RautavirtaJaime.github.io</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Jaime Rautavirta</span>
+      <span>Rakennettu Vantaalla / Tuusulassa</span>
+    </div>
+  </div>
+</footer>
 
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
 
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
-
-								<section>
-									<h3 class="major">Lists</h3>
-
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
-
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
-
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="demo-name">Name</label>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-											</div>
-											<div class="field half">
-												<label for="demo-email">Email</label>
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-											</div>
-											<div class="field">
-												<label for="demo-category">Category</label>
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											</div>
-											<div class="field">
-												<label for="demo-message">Message</label>
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
-
-							</article>
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright"><a href="mailto:RautavirtaJaime@Gmail.com">RautavirtaJaime@Gmail.com</a>
-</p>
-					</footer>
-
-			</div>
-
-		<!-- BG -->
-			<div id="bg"></div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+</body>
 </html>
